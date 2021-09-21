@@ -3,35 +3,35 @@ import {useState} from "react";
 
 export const App = () => {
 
-    const [start, startHandler] = useState([0, 0])
-    const [width, widthHandler] = useState(0)
-    const [height, heightHandler] = useState(0)
-    const [x, xHandler] = useState(0)
-    const [y, yHandler] = useState(0)
-    const [square_arr, squareArrHandler] = useState([])
-    const [counter, counterHandler] = useState(0)
+    const [start, setStart] = useState([0, 0])
+    const [width, setWidth] = useState(0)
+    const [height, setHeight] = useState(0)
+    const [x, setX] = useState(0)
+    const [y, setY] = useState(0)
+    const [square_arr, setSquareArr] = useState([])
+    const [counter, setCounter] = useState(0)
 
     const mouseMoveHandler = (e) => {
-        xHandler(e.clientX)
-        yHandler(e.clientY)
+        setX(e.clientX)
+        setY(e.clientY)
         let new_width = x - start[0]
         let new_height = y - start[1]
         if (e.movementX && Math.abs(width) < Math.abs(new_width)) {
-            widthHandler(new_width)
+            setWidth(new_width)
         }
         if (e.movementY && Math.abs(height) < Math.abs(new_height)) {
-            heightHandler(new_height)
+            setHeight(new_height)
         }
     }
 
     const mouseDownHandler = (e) => {
-        widthHandler(0)
-        heightHandler(0)
-        startHandler([e.clientX, e.clientY])
+        setWidth(0)
+        setHeight(0)
+        setStart([e.clientX, e.clientY])
     }
 
     const mouseUpHandler = () => {
-        counterHandler(counter + 1)
+        setCounter(counter + 1)
         let square = (
             <div style={{
                 backgroundColor: "black",
@@ -43,7 +43,7 @@ export const App = () => {
                 zIndex: -1
             }} key={counter}>
             </div>)
-        squareArrHandler([...square_arr, square])
+        setSquareArr([...square_arr, square])
     }
 
     return (<div>
@@ -53,5 +53,4 @@ export const App = () => {
         </div>
     );
 }
-
 
